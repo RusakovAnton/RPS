@@ -1,0 +1,55 @@
+class Manipulator{
+	properties{
+			object holding;
+		}
+}
+	
+class Hole{
+	properties{
+		boolean isFree = True;
+	}
+}
+
+
+class Leg{
+	properties{
+		Hole inTable = None;
+	}
+}
+
+initialization{
+	Manipulator robot[2];
+	Leg leg[4]; 
+	Hole hole[4];
+	robot[0].holding = None;
+}
+
+action pick_up_leg(Manipulator robot[0], Leg leg){
+	preconditions{
+		robot[0].holding = None;
+		leg.inTable = None;
+	}
+	result{
+		robot.holding = leg;
+	}
+}
+
+action attach_leg_to_tabletop(Manipulator robot[1], Leg leg, Hole hole){
+	preconditions{
+		robot[0].holding = leg;
+		hole.isFree = True;
+		leg.inTable = None;
+	}
+	result{
+		robot[0].holding = None;
+		hole.isFree = False;
+		leg.inTable = hole;
+	}
+}
+
+goal{
+	leg[3].inTable = hole[2];
+	leg[1].inTable = hole[4];
+	leg[4].inTable = hole[3];
+	leg[2].inTable = hole[1];
+}
