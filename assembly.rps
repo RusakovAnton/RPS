@@ -30,7 +30,7 @@ action pick_up_leg(Manipulator robot[0], Leg leg){
 		leg.inTable = None;
 	}
 	result{
-		robot.holding = leg;
+		robot[0].holding = leg;
 	}
 }
 
